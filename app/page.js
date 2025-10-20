@@ -654,7 +654,7 @@ export default function Portfolio() {
               }`}>
               <MapPin className="mb-4 text-pink-500" size={24} />
               <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Location</p>
-              <p className="font-medium">Delhi, India</p>
+              <p className="font-medium">Near Akshardham Temple, Delhi, India</p>
             </div>
           </div>
         </div>
