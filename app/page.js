@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Phone, MapPin, ArrowRight, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
   const [isDark, setIsDark] = useState(true);
@@ -410,28 +411,32 @@ export default function Portfolio() {
                 description: 'Scalable fundraising platform with real-time features',
                 tech: ['React', 'Next.js', 'TypeScript', 'GraphQL', 'WebSocket'],
                 impact: 'Optimized load times by 20%, increased speed by 30%',
-                gradient: 'from-blue-600 to-cyan-600'
+                gradient: 'from-blue-600 to-cyan-600',
+                url: 'https://www.charitableimpact.com/'
               },
               {
                 title: 'Lamps Plus',
                 description: 'E-commerce experience for leading home décor retailer',
                 tech: ['React', 'Redux', 'Sass', 'REST API'],
                 impact: 'Reduced production issues by 40%',
-                gradient: 'from-purple-600 to-pink-600'
+                gradient: 'from-purple-600 to-pink-600',
+                url: 'https://www.lampsplus.com/'
               },
               {
                 title: 'f3digital',
                 description: 'Modern web applications with Material UI',
                 tech: ['React', 'Material UI', 'Redux'],
                 impact: 'Enhanced performance and maintainability',
-                gradient: 'from-orange-600 to-red-600'
+                gradient: 'from-orange-600 to-red-600',
+                url: 'https://www.f3digital.co.in/'
               },
               {
                 title: 'Vaidaan',
                 description: 'E-commerce platform with dynamic filtering',
                 tech: ['Vue.js', 'Tailwind', 'Bootstrap'],
                 impact: 'Improved user experience significantly',
-                gradient: 'from-green-600 to-teal-600'
+                gradient: 'from-green-600 to-teal-600',
+                url: 'https://vaidaan.com/'
               }
             ].map((project, index) => (
               <div
@@ -446,7 +451,7 @@ export default function Portfolio() {
                     <div className={`inline-block px-4 py-1.5 rounded-full bg-gradient-to-r ${project.gradient} text-white text-sm font-semibold mb-4`}>
                       Featured
                     </div>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h3>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-4"><Link href={project.url} target='_blank'>{project.title}</Link></h3>
                     <p className={`text-xl mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
                     <div className="flex flex-wrap gap-3 mb-6">
                       {project.tech.map((tech, i) => (
