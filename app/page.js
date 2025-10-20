@@ -310,7 +310,7 @@ export default function Portfolio() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
               <div className="relative aspect-square rounded-[40px] bg-gradient-to-br from-blue-600 to-purple-600 flex items-end justify-start text-9xl font-black overflow-hidden">
                 <div className={`absolute inset-0 ${isDark ? 'bg-black/20' : 'bg-white/20'}`}></div>
-                <Image src="/IMG_20581.jpg" alt="Ravi Kumar" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 200px" style={{ objectFit: "cover" }}
+                <Image src="/IMG_20581.jpg" alt="Ravi Kumar" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1000px" style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-green-500 text-white px-6 py-3 rounded-full font-bold text-sm shadow-2xl">
