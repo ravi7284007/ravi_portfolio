@@ -5,6 +5,8 @@ import Image from 'next/image';
 export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
   const [isDark, setIsDark] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +15,108 @@ export default function Portfolio() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Mouse movement effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Particle effect
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 80;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+
+      draw() {
+        ctx.fillStyle = isDark 
+          ? `rgba(59, 130, 246, ${this.opacity})`
+          : `rgba(99, 102, 241, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx.strokeStyle = isDark
+              ? `rgba(59, 130, 246, ${0.15 * (1 - distance / 120)})`
+              : `rgba(99, 102, 241, ${0.1 * (1 - distance / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isDark]);
 
   const heroOpacity = Math.max(0, 1 - scrollY / 600);
   const heroScale = Math.max(0.8, 1 - scrollY / 2000);
@@ -54,24 +158,75 @@ export default function Portfolio() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        {/* Particle Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: 0.6 }}
+        />
+
+        {/* Mouse Follow Gradient */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, ${
+              isDark 
+                ? 'rgba(59, 130, 246, 0.15)' 
+                : 'rgba(99, 102, 241, 0.08)'
+            }, transparent 40%)`,
+          }}
+        />
+
+        {/* Animated Gradient Orbs */}
         <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-30"
+          <div 
+            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
             style={{
-              background: isDark
-                ? 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.2), transparent 70%)'
-                : 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1), transparent 70%)',
-              transform: `scale(${1 + scrollY * 0.001}) translateY(${scrollY * 0.3}px)`,
-              filter: 'blur(60px)',
+              background: isDark 
+                ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4))'
+                : 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))',
+              transform: `translate(${mousePosition.x * 0.05}px, ${mousePosition.y * 0.05}px) scale(${1 + scrollY * 0.001})`,
+              transition: 'transform 0.3s ease-out',
+            }}
+          />
+          <div 
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{
+              background: isDark 
+                ? 'linear-gradient(135deg, rgba(236, 72, 153, 0.4), rgba(139, 92, 246, 0.4))'
+                : 'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.2))',
+              transform: `translate(${-mousePosition.x * 0.03}px, ${-mousePosition.y * 0.03}px) scale(${1 + scrollY * 0.001})`,
+              transition: 'transform 0.3s ease-out',
+            }}
+          />
+          <div 
+            className="absolute top-1/2 left-1/2 w-96 h-96 rounded-full opacity-10 blur-3xl"
+            style={{
+              background: isDark 
+                ? 'linear-gradient(135deg, rgba(34, 211, 238, 0.4), rgba(59, 130, 246, 0.4))'
+                : 'linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(59, 130, 246, 0.2))',
+              transform: `translate(${mousePosition.x * 0.04}px, ${mousePosition.y * 0.04}px) scale(${1 + scrollY * 0.001})`,
+              transition: 'transform 0.3s ease-out',
             }}
           />
         </div>
 
-        <div
+        {/* Grid Pattern */}
+        <div 
+          className={`absolute inset-0 opacity-[0.03] ${isDark ? '' : 'opacity-[0.02]'}`}
+          style={{
+            backgroundImage: `linear-gradient(${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'} 1px, transparent 1px)`,
+            backgroundSize: '50px 50px',
+            transform: `perspective(500px) rotateX(60deg) scale(2) translateY(${scrollY * 0.1}px)`,
+          }}
+        />
+
+        <div 
           className="relative z-10 text-center px-6 max-w-6xl mx-auto"
           style={{
             opacity: heroOpacity,
-            transform: `scale(${heroScale}) translateY(${scrollY * 0.5}px)`,
+            transform: `scale(${heroScale}) translateY(${scrollY * 0.5}px) translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+            transition: 'transform 0.1s ease-out',
           }}
         >
           <div className="mb-6">
@@ -154,13 +309,7 @@ export default function Portfolio() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
               <div className="relative aspect-square rounded-[40px] bg-gradient-to-br from-blue-600 to-purple-600 flex items-end justify-start text-9xl font-black overflow-hidden">
                 <div className={`absolute inset-0 ${isDark ? 'bg-black/20' : 'bg-white/20'}`}></div>
-                <span className="relative z-10 bottom-0 p-3 text-2xl">Ravi Kumar</span>
-                <Image
-                  src="/IMG_20581.jpg"
-                  alt="Ravi Kumar"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 200px"
-                  style={{ objectFit: "cover" }}
+                <Image src="/IMG_20581.jpg" alt="Ravi Kumar" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 200px" style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-green-500 text-white px-6 py-3 rounded-full font-bold text-sm shadow-2xl">
@@ -215,8 +364,8 @@ export default function Portfolio() {
               { name: 'JavaScript', level: 92 },
               { name: 'Redux', level: 85 },
               { name: 'Tailwind CSS', level: 93 },
-              { name: 'GraphQL', level: 80 },
-              { name: 'MongoDB', level: 75 }
+              { name: 'GraphQL', level: 50 },
+              { name: 'HTML/CSS', level: 95 }
             ].map((skill, index) => (
               <div
                 key={index}
