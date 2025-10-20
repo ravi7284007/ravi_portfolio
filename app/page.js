@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Phone, MapPin, ArrowRight, Moon, Sun } from 'lucide-react';
-
+import Image from 'next/image';
 export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
   const [isDark, setIsDark] = useState(true);
@@ -20,11 +20,10 @@ export default function Portfolio() {
   return (
     <div className={`${isDark ? 'bg-black text-white' : 'bg-white text-black'} transition-colors duration-700`}>
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrollY > 50 
-          ? `backdrop-blur-2xl ${isDark ? 'bg-black/80 border-white/10' : 'bg-white/80 border-black/10'} border-b` 
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrollY > 50
+          ? `backdrop-blur-2xl ${isDark ? 'bg-black/80 border-white/10' : 'bg-white/80 border-black/10'} border-b`
           : 'bg-transparent'
-      }`}>
+        }`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="text-2xl font-semibold tracking-tight">RK</div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -34,21 +33,19 @@ export default function Portfolio() {
             <a href="#contact" className={`${isDark ? 'hover:text-gray-300' : 'hover:text-gray-600'} transition-colors`}>Contact</a>
           </div>
           <div className="flex items-center gap-3">
-            <button 
+            <button
               onClick={() => setIsDark(!isDark)}
-              className={`p-2.5 rounded-full transition-all ${
-                isDark 
-                  ? 'bg-white/10 hover:bg-white/20' 
+              className={`p-2.5 rounded-full transition-all ${isDark
+                  ? 'bg-white/10 hover:bg-white/20'
                   : 'bg-black/10 hover:bg-black/20'
-              }`}
+                }`}
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <a href="mailto:ravi7284007@gmail.com" className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
-              isDark 
-                ? 'bg-white text-black hover:bg-gray-200' 
+            <a href="mailto:ravi7284007@gmail.com" className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${isDark
+                ? 'bg-white text-black hover:bg-gray-200'
                 : 'bg-black text-white hover:bg-gray-800'
-            }`}>
+              }`}>
               Hire Me
             </a>
           </div>
@@ -58,10 +55,10 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 overflow-hidden">
-          <div 
+          <div
             className="absolute inset-0 opacity-30"
             style={{
-              background: isDark 
+              background: isDark
                 ? 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.2), transparent 70%)'
                 : 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1), transparent 70%)',
               transform: `scale(${1 + scrollY * 0.001}) translateY(${scrollY * 0.3}px)`,
@@ -70,7 +67,7 @@ export default function Portfolio() {
           />
         </div>
 
-        <div 
+        <div
           className="relative z-10 text-center px-6 max-w-6xl mx-auto"
           style={{
             opacity: heroOpacity,
@@ -78,11 +75,10 @@ export default function Portfolio() {
           }}
         >
           <div className="mb-6">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-              isDark 
-                ? 'bg-white/5 backdrop-blur-xl border-white/10' 
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-all ${isDark
+                ? 'bg-white/5 backdrop-blur-xl border-white/10'
                 : 'bg-black/5 backdrop-blur-xl border-black/10'
-            }`}>
+              }`}>
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span>Available for new opportunities</span>
             </div>
@@ -91,14 +87,13 @@ export default function Portfolio() {
           <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[180px] font-bold mb-8 tracking-tighter leading-none">
             Ravi Kumar
           </h1>
-          
+
           <p className="text-3xl sm:text-4xl md:text-6xl font-semibold mb-6 tracking-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Frontend Developer
           </p>
 
-          <p className={`text-lg sm:text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light ${
-            isDark ? 'text-gray-400' : 'text-gray-600'
-          }`}>
+          <p className={`text-lg sm:text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light ${isDark ? 'text-gray-400' : 'text-gray-600'
+            }`}>
             Crafting exceptional digital experiences with React, Next.js, and TypeScript.
             <br />
             <span className={isDark ? 'text-white' : 'text-black'}> 7+ years </span>
@@ -106,42 +101,37 @@ export default function Portfolio() {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#work" className={`group px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2 ${
-              isDark 
-                ? 'bg-white text-black hover:bg-gray-200' 
+            <a href="#work" className={`group px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 flex items-center gap-2 ${isDark
+                ? 'bg-white text-black hover:bg-gray-200'
                 : 'bg-black text-white hover:bg-gray-800'
-            }`}>
+              }`}>
               <span>View My Work</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="mailto:ravi7284007@gmail.com" className={`px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 ${
-              isDark 
-                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20' 
+            <a href="mailto:ravi7284007@gmail.com" className={`px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 ${isDark
+                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20'
                 : 'bg-black/10 backdrop-blur-xl border border-black/20 hover:bg-black/20'
-            }`}>
+              }`}>
               Get in Touch
             </a>
           </div>
         </div>
 
-        <div 
+        <div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
           style={{ opacity: Math.max(0, 1 - scrollY / 300) }}
         >
-          <div className={`w-6 h-10 border-2 rounded-full flex justify-center pt-2 ${
-            isDark ? 'border-white/30' : 'border-black/30'
-          }`}>
-            <div className={`w-1 h-2 rounded-full animate-bounce ${
-              isDark ? 'bg-white' : 'bg-black'
-            }`}></div>
+          <div className={`w-6 h-10 border-2 rounded-full flex justify-center pt-2 ${isDark ? 'border-white/30' : 'border-black/30'
+            }`}>
+            <div className={`w-1 h-2 rounded-full animate-bounce ${isDark ? 'bg-white' : 'bg-black'
+              }`}></div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className={`py-32 px-6 relative ${
-        isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
-      }`}>
+      <section id="about" className={`py-32 px-6 relative ${isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
+        }`}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -162,9 +152,16 @@ export default function Portfolio() {
 
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
-              <div className="relative aspect-square rounded-[40px] bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-9xl font-black overflow-hidden">
+              <div className="relative aspect-square rounded-[40px] bg-gradient-to-br from-blue-600 to-purple-600 flex items-end justify-start text-9xl font-black overflow-hidden">
                 <div className={`absolute inset-0 ${isDark ? 'bg-black/20' : 'bg-white/20'}`}></div>
-                <span className="relative z-10">RK</span>
+                <span className="relative z-10 bottom-0 p-3 text-2xl">Ravi Kumar</span>
+                <Image
+                  src="/IMG_20581.jpg"
+                  alt="Ravi Kumar"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 200px"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-green-500 text-white px-6 py-3 rounded-full font-bold text-sm shadow-2xl">
                 Available Now
@@ -221,20 +218,19 @@ export default function Portfolio() {
               { name: 'GraphQL', level: 80 },
               { name: 'MongoDB', level: 75 }
             ].map((skill, index) => (
-              <div 
-                key={index} 
-                className={`group rounded-[32px] p-8 transition-all hover:scale-105 cursor-default ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700' 
+              <div
+                key={index}
+                className={`group rounded-[32px] p-8 transition-all hover:scale-105 cursor-default ${isDark
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700'
                     : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 hover:border-gray-300'
-                }`}
+                  }`}
               >
                 <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
                   {skill.level}%
                 </div>
                 <div className="text-lg font-semibold mb-4">{skill.name}</div>
                 <div className={`h-1 rounded-full overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000 group-hover:scale-x-105 origin-left"
                     style={{ width: `${skill.level}%` }}
                   ></div>
@@ -246,9 +242,8 @@ export default function Portfolio() {
       </section>
 
       {/* Work Section */}
-      <section id="work" className={`py-32 px-6 ${
-        isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
-      }`}>
+      <section id="work" className={`py-32 px-6 ${isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
+        }`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
@@ -290,13 +285,12 @@ export default function Portfolio() {
                 gradient: 'from-green-600 to-teal-600'
               }
             ].map((project, index) => (
-              <div 
+              <div
                 key={index}
-                className={`group rounded-[40px] p-8 md:p-12 transition-all hover:scale-[1.01] cursor-default ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700' 
+                className={`group rounded-[40px] p-8 md:p-12 transition-all hover:scale-[1.01] cursor-default ${isDark
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700'
                     : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 hover:border-gray-300'
-                }`}
+                  }`}
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                   <div className="flex-1">
@@ -307,11 +301,10 @@ export default function Portfolio() {
                     <p className={`text-xl mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
                     <div className="flex flex-wrap gap-3 mb-6">
                       {project.tech.map((tech, i) => (
-                        <span key={i} className={`px-4 py-2 rounded-full text-sm font-medium ${
-                          isDark 
-                            ? 'bg-white/5 backdrop-blur-xl border border-white/10' 
+                        <span key={i} className={`px-4 py-2 rounded-full text-sm font-medium ${isDark
+                            ? 'bg-white/5 backdrop-blur-xl border border-white/10'
                             : 'bg-black/5 backdrop-blur-xl border border-black/10'
-                        }`}>
+                          }`}>
                           {tech}
                         </span>
                       ))}
@@ -362,22 +355,20 @@ export default function Portfolio() {
                 location: 'Noida, India'
               }
             ].map((exp, index) => (
-              <div key={index} className={`rounded-[32px] p-8 transition-all hover:scale-[1.01] ${
-                isDark 
-                  ? 'bg-gray-50 hover:bg-gray-100' 
+              <div key={index} className={`rounded-[32px] p-8 transition-all hover:scale-[1.01] ${isDark
+                  ? 'bg-gray-50 hover:bg-gray-100'
                   : 'bg-gray-900 hover:bg-gray-800'
-              }`}>
+                }`}>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div>
                     <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
                     <p className={`text-xl font-semibold mb-1 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>{exp.company}</p>
                     <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{exp.location}</p>
                   </div>
-                  <div className={`px-5 py-2.5 rounded-full text-sm font-medium self-start md:self-auto ${
-                    isDark 
-                      ? 'bg-black text-white' 
+                  <div className={`px-5 py-2.5 rounded-full text-sm font-medium self-start md:self-auto ${isDark
+                      ? 'bg-black text-white'
                       : 'bg-white text-black'
-                  }`}>
+                    }`}>
                     {exp.period}
                   </div>
                 </div>
@@ -394,11 +385,10 @@ export default function Portfolio() {
             <div>
               <h3 className="text-4xl font-bold mb-12">Education</h3>
               <div className="space-y-6">
-                <div className={`rounded-[32px] p-8 transition-all hover:scale-[1.02] ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800' 
+                <div className={`rounded-[32px] p-8 transition-all hover:scale-[1.02] ${isDark
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800'
                     : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200'
-                }`}>
+                  }`}>
                   <h4 className="text-2xl font-bold mb-2">MCA (Computers)</h4>
                   <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Swami Vivekanand Subharti University, Meerut</p>
                   <div className={`flex items-center gap-4 text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
@@ -408,11 +398,10 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                <div className={`rounded-[32px] p-8 transition-all hover:scale-[1.02] ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800' 
+                <div className={`rounded-[32px] p-8 transition-all hover:scale-[1.02] ${isDark
+                    ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800'
                     : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200'
-                }`}>
+                  }`}>
                   <h4 className="text-2xl font-bold mb-2">B.Com (Commerce)</h4>
                   <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Allahabad University</p>
                   <div className={`flex items-center gap-4 text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
@@ -436,11 +425,10 @@ export default function Portfolio() {
                   'Foundations of Cybersecurity',
                   'Generative AI for Everyone'
                 ].map((cert, i) => (
-                  <div key={i} className={`rounded-[24px] p-6 transition-all hover:scale-[1.02] ${
-                    isDark 
-                      ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700' 
+                  <div key={i} className={`rounded-[24px] p-6 transition-all hover:scale-[1.02] ${isDark
+                      ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 hover:border-gray-700'
                       : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 hover:border-gray-300'
-                  }`}>
+                    }`}>
                     <p className={isDark ? 'text-gray-300' : 'text-gray-700'}>{cert}</p>
                   </div>
                 ))}
@@ -451,9 +439,8 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className={`py-32 px-6 ${
-        isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
-      }`}>
+      <section id="contact" className={`py-32 px-6 ${isDark ? 'bg-gradient-to-b from-black via-gray-950 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'
+        }`}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl sm:text-7xl md:text-8xl font-bold mb-8 tracking-tight leading-tight">
             Let's create
@@ -466,57 +453,51 @@ export default function Portfolio() {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-16">
-            <a href="mailto:ravi7284007@gmail.com" className={`group px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${
-              isDark 
-                ? 'bg-white text-black hover:bg-gray-200' 
+            <a href="mailto:ravi7284007@gmail.com" className={`group px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${isDark
+                ? 'bg-white text-black hover:bg-gray-200'
                 : 'bg-black text-white hover:bg-gray-800'
-            }`}>
+              }`}>
               <Mail size={20} />
               <span>Send Email</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="https://linkedin.com/in/ravi7284007" target="_blank" rel="noopener noreferrer" className={`px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${
-              isDark 
-                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20' 
+            <a href="https://linkedin.com/in/ravi7284007" target="_blank" rel="noopener noreferrer" className={`px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${isDark
+                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20'
                 : 'bg-black/10 backdrop-blur-xl border border-black/20 hover:bg-black/20'
-            }`}>
+              }`}>
               <Linkedin size={20} />
               <span>LinkedIn</span>
             </a>
-            <a href="https://github.com/ravi7284007" target="_blank" rel="noopener noreferrer" className={`px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${
-              isDark 
-                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20' 
+            <a href="https://github.com/ravi7284007" target="_blank" rel="noopener noreferrer" className={`px-10 py-5 rounded-full text-lg font-semibold transition-all hover:scale-105 flex items-center gap-2 ${isDark
+                ? 'bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20'
                 : 'bg-black/10 backdrop-blur-xl border border-black/20 hover:bg-black/20'
-            }`}>
+              }`}>
               <Github size={20} />
               <span>GitHub</span>
             </a>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${
-              isDark 
-                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800' 
+            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${isDark
+                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800'
                 : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200'
-            }`}>
+              }`}>
               <Mail className="mb-4 text-blue-500" size={24} />
               <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Email</p>
               <p className="font-medium break-all">ravi7284007@gmail.com</p>
             </div>
-            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${
-              isDark 
-                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800' 
+            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${isDark
+                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800'
                 : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200'
-            }`}>
+              }`}>
               <Phone className="mb-4 text-purple-500" size={24} />
               <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Phone</p>
               <p className="font-medium">+91-9971706564</p>
             </div>
-            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${
-              isDark 
-                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800' 
+            <div className={`rounded-[32px] p-8 text-left transition-all hover:scale-105 ${isDark
+                ? 'bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800'
                 : 'bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200'
-            }`}>
+              }`}>
               <MapPin className="mb-4 text-pink-500" size={24} />
               <p className={`text-sm mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Location</p>
               <p className="font-medium">Noida, India</p>
@@ -526,27 +507,23 @@ export default function Portfolio() {
       </section>
 
       {/* Footer */}
-      <footer className={`py-12 px-6 border-t ${
-        isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-200'
-      }`}>
+      <footer className={`py-12 px-6 border-t ${isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-200'
+        }`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
             © 2025 Ravi Kumar. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="https://linkedin.com/in/ravi7284007" target="_blank" rel="noopener noreferrer" className={`transition-colors ${
-              isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
-            }`}>
+            <a href="https://linkedin.com/in/ravi7284007" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
+              }`}>
               <Linkedin size={20} />
             </a>
-            <a href="https://github.com/ravi7284007" target="_blank" rel="noopener noreferrer" className={`transition-colors ${
-              isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
-            }`}>
+            <a href="https://github.com/ravi7284007" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
+              }`}>
               <Github size={20} />
             </a>
-            <a href="mailto:ravi7284007@gmail.com" className={`transition-colors ${
-              isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
-            }`}>
+            <a href="mailto:ravi7284007@gmail.com" className={`transition-colors ${isDark ? 'text-gray-500 hover:text-white' : 'text-gray-500 hover:text-black'
+              }`}>
               <Mail size={20} />
             </a>
           </div>
