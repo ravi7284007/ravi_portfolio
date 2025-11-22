@@ -501,12 +501,6 @@ export default function Portfolio() {
                 role: 'Frontend Developer',
                 period: 'Jul 2019 - Dec 2021',
                 location: 'Noida, India'
-              },
-              {
-                company: 'Oakyweb Pvt. Ltd.',
-                role: 'Frontend Developer',
-                period: 'Jun 2018 - Jul 2019',
-                location: 'Noida, India'
               }
             ].map((exp, index) => (
               <div key={index} className={`rounded-[32px] p-8 transition-all hover:scale-[1.01] ${isDark
